@@ -1,0 +1,43 @@
+﻿<!--
+-------------------------------------------------------------------------------------------------
+BlazorDesktopWPF-CustomTitleBar - © Copyright 2021 - Jam-Es.com
+Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
+-------------------------------------------------------------------------------------------------
+-->
+
+@using System.Windows;
+@using Microsoft.AspNetCore.Components.Web;
+
+<div class="page-container">
+
+    <TitleBar></TitleBar>
+
+    <div class="content-container">
+
+        <h1>Blazor in WPF</h1>
+
+        <p>This entire UI is written in HTML, including the title bar.</p>
+
+        <p>Using the blazor control for WPF in .NET 6 preview 3.</p>
+
+        <h2>Counter</h2>
+
+        <p>The current count is: @currentCount</p>
+        <button @onclick="IncrementCount">Count</button>
+
+        <h2>Room For Improvement</h2>
+
+        <p>Moving the window by dragging the title bar is a little buggy. That's becuase WPF events cannot be used with WebViews so dragging starts with an 'onmousedown' event from JavaScript, and ends with 'onmouseup'. The 'onmouseup' events are not aways caught if the mouse isn't directly over the titlebar. In between the start and end of the dragging, the .NET runtime uses a dispatcher to refresh the window position 60 times a second. That has a performance overhead, and removes other native features like window snapping. This needs some attention.</p>
+
+    </div>
+</div>
+
+
+@code {
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}

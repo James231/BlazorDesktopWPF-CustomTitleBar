@@ -1,0 +1,72 @@
+﻿<!--
+-------------------------------------------------------------------------------------------------
+BlazorDesktopWPF-CustomTitleBar - © Copyright 2021 - Jam-Es.com
+Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
+-------------------------------------------------------------------------------------------------
+-->
+
+@using System.Windows;
+@using Microsoft.AspNetCore.Components.Web;
+
+<div class="titlebar" @onmouseup="BarMouseUp" @onmousedown="BarMouseDown">
+    <button class="titlebar-btn" onclick="alert('js alert: navigation pressed');">
+        <img src="svg/navigation.svg" />
+    </button>
+    <div class="window-title">
+        My Web Application
+    </div>
+    <div style="flex-grow:1"></div>
+    <button class="titlebar-btn" onclick="alert('js alert: settings pressed');">
+        <img src="svg/settings.svg" />
+    </button>
+    <button class="titlebar-btn" @onclick="Minimize">
+        <img src="svg/minimize.svg" />
+    </button>
+    <button class="titlebar-btn" @onclick="Maximize">
+        @if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+        {
+            <img src="svg/restore.svg" />
+        }
+        else
+        {
+            <img src="svg/maximize.svg" />
+        }
+    </button>
+    <button class="titlebar-cbtn" @onclick="Close">
+        <img src="svg/dismiss.svg" />
+    </button>
+</div>
+
+@code {
+    void BarMouseDown(MouseEventArgs e)
+    {
+        BlazorWebView_CustomTitleBar.MouseMove.StartMove();
+    }
+
+    void BarMouseUp()
+    {
+        BlazorWebView_CustomTitleBar.MouseMove.EndMove();
+    }
+
+    void Minimize()
+    {
+        Application.Current.MainWindow.WindowState = WindowState.Minimized;
+    }
+
+    void Close()
+    {
+        Application.Current.MainWindow.Close();
+    }
+
+    void Maximize()
+    {
+        if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
+        }
+        else
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Maximized;
+        }
+    }
+}

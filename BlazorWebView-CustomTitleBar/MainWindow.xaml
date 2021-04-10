@@ -1,0 +1,28 @@
+﻿<!--
+BlazorDesktopWPF-CustomTitleBar - © Copyright 2021 - Jam-Es.com
+Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
+-->
+    
+<Window x:Class="BlazorWebView_CustomTitleBar.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:blazor="clr-namespace:Microsoft.AspNetCore.Components.WebView.Wpf;assembly=Microsoft.AspNetCore.Components.WebView.Wpf"
+        xmlns:local="clr-namespace:BlazorWebView_CustomTitleBar"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        Background="{DynamicResource SystemControlPageBackgroundChromeMediumLowBrush}"
+        ui:TitleBar.ExtendViewIntoTitleBar="True"
+        ui:TitleBar.IsBackButtonVisible="False"
+        ui:TitleBar.Style="{DynamicResource AppTitleBarStyle}"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MinWidth="400" MinHeight="200">
+    <Grid>
+        <blazor:BlazorWebView x:Name="blazorwebview" HostPage="wwwroot/index.html" Services="{StaticResource services}">
+            <blazor:BlazorWebView.RootComponents>
+                <blazor:RootComponent Selector="#app" ComponentType="{x:Type local:Counter}" />
+            </blazor:BlazorWebView.RootComponents>
+        </blazor:BlazorWebView>
+    </Grid>
+</Window>
